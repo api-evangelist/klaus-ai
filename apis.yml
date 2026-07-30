@@ -1,22 +1,135 @@
 aid: klaus-ai
-name: Klaus Ai
-description: Klaus Ai is a company surfaced as a portfolio company of y-combinator and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+name: Klaus AI
+description: >-
+  Klaus is a managed cloud hosting platform for OpenClaw AI agents, built by Usebits Inc (Y Combinator W26,
+  San Francisco) and founded by Bailey Wickham and Robbie Thompson. Klaus provisions an isolated, pre-configured
+  OpenClaw instance on dedicated AWS ARM compute in about five minutes, with messaging channels (Slack, Telegram,
+  WhatsApp, iMessage, Discord), Google Workspace, browser automation via Chromium and a Chrome Browser Relay
+  extension, AgentMail email, GitHub backup, Tailscale SSH, scheduled cron tasks, semantic memory backed by
+  OpenRouter embeddings, and instance webhooks that let external services trigger the agent over authenticated
+  HTTP. Model access is brokered through OpenRouter with bring-your-own-key and ChatGPT-subscription options.
+  The platform is operated through the Klaus web dashboard and a first-party command-line client published to
+  npm as @klausai/cli, which talks to a tRPC API at api.klausai.com and proxies an OpenAI-compatible
+  chat-completions endpoint. Authentication is by API key or an OAuth 2.0 Device Authorization Grant (RFC 8628).
 url: https://raw.githubusercontent.com/api-evangelist/klaus-ai/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/klaus-ai.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - y-combinator
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-legal-entity: Usebits Inc
+x-yc-batch: W26
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
-- Company
-apis: []
+- Artificial Intelligence
+- AI Agents
+- Agent Hosting
+- OpenClaw
+- Personal Assistant
+- Automation
+- Managed Hosting
+- Integrations
+- Webhooks
+- Command Line
+- Messaging
+- Y Combinator
+apis:
+- aid: klaus-ai:klaus-ai-platform-api
+  name: Klaus Platform API
+  description: >-
+    The Klaus platform API at api.klausai.com is a tRPC RPC surface used by the first-party @klausai/cli
+    command-line client to manage OpenClaw instances, agents, integrations, models, and chat sessions, plus an
+    OpenAI-compatible chat-completions proxy at /openclaw/v1/chat/completions for sending messages to an agent.
+    Requests authenticate with an x-api-key API key created at klausai.com/account, or with a bearer session
+    token obtained through the OAuth 2.0 Device Authorization Grant. The active instance is selected with an
+    x-klaus-instance-id request header. Klaus publishes no OpenAPI description of this surface; the operations
+    catalogued here were read from the provider's own published npm client bundle.
+  humanURL: https://klausai.com/faq/
+  baseURL: https://api.klausai.com
+  tags:
+  - AI Agents
+  - Instances
+  - Integrations
+  - Models
+  - Sessions
+  - Chat Completions
+  properties:
+  - type: Authentication
+    url: authentication/klaus-ai-authentication.yml
+  - type: Conventions
+    url: conventions/klaus-ai-conventions.yml
+  - type: ErrorCatalog
+    url: errors/klaus-ai-problem-types.yml
+  - type: CLI
+    url: cli/klaus-ai-cli.yml
+common:
+- type: Website
+  url: https://klausai.com/
+- type: DeveloperPortal
+  url: https://klausai.com/faq/
+- type: Documentation
+  url: https://klausai.com/faq/
+- type: GettingStarted
+  url: https://klausai.com/blog/how-to-set-up-openclaw-complete-getting-started-guide/
+- type: Support
+  url: https://klausai.com/support
+- type: Blog
+  url: https://klausai.com/blog/
+- type: BlogRSS
+  url: https://klausai.com/blog/rss.xml
+- type: Pricing
+  url: https://klausai.com/klaus/subscribe
+- type: SignUp
+  url: https://klausai.com/login
+- type: TermsOfService
+  url: https://klausai.com/terms/
+- type: PrivacyPolicy
+  url: https://klausai.com/privacy/
+- type: Packages
+  url: packages/klaus-ai-packages.yml
+- type: SDKs
+  url: packages/klaus-ai-packages.yml
+- type: CLI
+  url: cli/klaus-ai-cli.yml
+- type: Authentication
+  url: authentication/klaus-ai-authentication.yml
+- type: Conventions
+  url: conventions/klaus-ai-conventions.yml
+- type: ErrorCatalog
+  url: errors/klaus-ai-problem-types.yml
+- type: Webhooks
+  url: asyncapi/klaus-ai-webhooks.yml
+- type: Conformance
+  url: conformance/klaus-ai-conformance.yml
+- type: Lifecycle
+  url: lifecycle/klaus-ai-lifecycle.yml
+- type: WellKnown
+  url: well-known/klaus-ai-well-known.yml
+- type: DomainSecurity
+  url: security/klaus-ai-domain-security.yml
+- type: LLMsTxt
+  url: llms/klaus-ai-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
