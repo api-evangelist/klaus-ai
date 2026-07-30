@@ -1,0 +1,58 @@
+generated: '2026-07-19'
+method: derived
+source: npm @klausai/cli@0.1.7 (dist/klaus.js published bundle); https://klausai.com/terms/; https://klausai.com/privacy/
+description: >-
+  Which cross-cutting standards the Klaus platform surface conforms to. Derived from the provider's own
+  published client and public legal pages. Klaus publishes no certification or compliance program, so no
+  Compliance pointer is emitted in apis.yml.
+standards:
+- id: rfc8628-oauth2-device-grant
+  conforms: true
+  evidence: >-
+    CLI login posts to /api/auth/device/code then polls /api/auth/device/token with
+    grant_type=urn:ietf:params:oauth:grant-type:device_code and handles the standard authorization_pending,
+    slow_down, expired_token, and access_denied error codes plus the interval hint.
+- id: oauth2-bearer-token
+  conforms: true
+  evidence: 'Session tokens are sent as an Authorization: Bearer header.'
+- id: api-key-header-auth
+  conforms: true
+  evidence: API keys are sent in the x-api-key request header.
+- id: openai-chat-completions-compatibility
+  conforms: true
+  evidence: POST /openclaw/v1/chat/completions accepts the messages[] and stream body shape.
+- id: mcp-model-context-protocol
+  conforms: false
+  evidence: Klaus hosts agents that consume third-party MCP servers but publishes none of its own.
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI or Swagger description is published for api.klausai.com.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document published; the event surface is inbound webhooks only.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No application/problem+json responses observed or documented.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns the SPA shell (soft 404) on klausai.com and usebits.com.
+- id: oidc-discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration returns the SPA shell (soft 404).
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returns the SPA shell (soft 404).
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns the SPA shell (soft 404).
+- id: llms-txt
+  conforms: false
+  evidence: /llms.txt returns the SPA shell (soft 404).
+- id: gdpr
+  conforms: null
+  evidence: >-
+    The Privacy Policy describes user controls, deletion on request, and token revocation, but makes no GDPR
+    compliance claim and names no certification.
+certifications_published: []
+compliance_program_published: false
+trust_center_published: false

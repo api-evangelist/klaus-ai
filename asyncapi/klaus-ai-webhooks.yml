@@ -1,0 +1,51 @@
+generated: '2026-07-19'
+method: searched
+source: https://klausai.com/faq/
+type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Klaus publishes no AsyncAPI document. No /asyncapi.yaml, event catalog, or streaming specification was found
+  on klausai.com, usebits.com, or any GitHub organization. Nothing was fabricated to fill the gap.
+description: >-
+  Klaus's event surface is inbound: instance webhooks let external services trigger a hosted agent over
+  authenticated HTTP, and integration webhooks forward incoming events (notably AgentMail email) into the
+  agent. Klaus does not document an outbound event catalogue with typed payloads.
+direction: inbound
+webhooks:
+- name: instance-webhook
+  direction: inbound
+  description: >-
+    Send an authenticated HTTP request to your hosted Klaus agent to trigger it from any external service.
+  configured_at: Klaus dashboard, Integrations page
+  provisioning: Creating the webhook returns a URL and a token.
+  authentication: Bearer token issued with the webhook URL
+  payload_schema: null
+  source: https://klausai.com/faq/
+- name: agentmail-inbound-email
+  direction: inbound
+  description: >-
+    Enable webhooks on the AgentMail integration to forward incoming email to the agent so Klaus can
+    auto-respond.
+  configured_at: Klaus dashboard, AgentMail integration card
+  payload_schema: null
+  upstream_provider: AgentMail
+  source: https://klausai.com/faq/
+scheduled_triggers:
+- name: scheduled-tasks
+  description: >-
+    Cron jobs created on the Scheduled Tasks page run a prompt on a schedule and deliver the result to a chosen
+    channel (Slack, Telegram, and others). Time-based rather than event-based, but it is the other way a Klaus
+    agent is invoked without a human in the chat.
+  configurable:
+  - prompt
+  - model
+  - schedule
+  - delivery channel
+  source: https://klausai.com/faq/
+outbound_delivery_channels:
+- slack
+- telegram
+- whatsapp
+- imessage
+- discord
+- email (AgentMail)

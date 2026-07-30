@@ -1,0 +1,123 @@
+generated: '2026-07-19'
+method: derived
+source: npm @klausai/cli@0.1.7 (dist/klaus.js published bundle)
+name: klaus
+description: >-
+  First-party Klaus command-line client. Manages hosted OpenClaw instances, agents, integrations, models, and
+  chat sessions, and sends messages to an agent. Klaus publishes no prose CLI reference; the command surface
+  below was read out of the provider's own published npm bundle, so every command, flag, and description here
+  is verbatim from that artifact.
+package: '@klausai/cli'
+binary: klaus
+version: 0.1.7
+install:
+- method: npm
+  command: npm install -g @klausai/cli
+- method: npx
+  command: npx @klausai/cli
+api_base: https://api.klausai.com
+api_base_override_env: KLAUS_API_URL
+config_file: per-user JSON config written with mode 0600 (stores apiKey or sessionToken, baseUrl, activeInstanceId)
+authentication:
+  api_key_env: KLAUS_API_KEY
+  api_key_creation: https://klausai.com/account
+  modes:
+  - api-key (x-api-key header)
+  - session (Authorization: Bearer, from device-flow login)
+global_options:
+- flag: --json
+  description: Output as JSON
+commands:
+- name: login
+  description: Authenticate with your Klaus account
+  options:
+  - flag: --api-key [key]
+    description: Use an API key instead of browser login
+  default_flow: OAuth 2.0 Device Authorization Grant (browser)
+- name: logout
+  description: Clear stored credentials
+- name: whoami
+  description: Show current user and organization
+- name: chat
+  description: Send a message to your agent
+  argument: <message>
+  calls: POST /openclaw/v1/chat/completions
+- name: model
+  description: Show or change the active model
+  subcommands:
+  - name: list
+    description: List available models
+  - name: set
+    description: Set the primary model
+- name: instance
+  description: Manage instances
+  subcommands:
+  - name: list
+    description: List all instances you have access to
+  - name: status
+    description: Show instance status
+  - name: create
+    description: Create a new instance
+    options:
+    - flag: -y, --yes
+      description: Skip the interactive confirmation prompt
+  - name: use
+    description: Switch the active instance for this session
+  - name: exec
+    description: Run a command on your instance
+    options:
+    - flag: -t, --timeout <seconds>
+      description: Timeout in seconds (max 120)
+- name: agent
+  description: Manage agents
+  subcommands:
+  - name: list
+    description: List agents
+  - name: get
+    description: Show agent details
+- name: integration
+  description: Manage integrations
+  subcommands:
+  - name: list
+    description: List integrations and their status
+  - name: get
+    description: Show integration details
+- name: session
+  description: Manage chat sessions
+  subcommands:
+  - name: list
+    description: List past sessions
+    options:
+    - flag: -n, --limit <n>
+      description: Number of sessions to show (default 20)
+  - name: show
+    description: Show session messages
+    options:
+    - flag: -n, --limit <n>
+      description: Number of messages to show (default 20)
+    - flag: --agent <id>
+      description: Filter by agent ID
+key_flows:
+- name: Authenticate and pick an instance
+  steps:
+  - klaus login
+  - klaus instance list
+  - klaus instance use <instanceId>
+- name: Talk to your agent from the terminal
+  steps:
+  - klaus model list
+  - klaus model set <model>
+  - klaus chat "<message>"
+- name: Provision and operate an instance
+  steps:
+  - klaus instance create
+  - klaus instance status
+  - klaus instance exec "<command>"
+- name: Review agent history
+  steps:
+  - klaus session list
+  - klaus session show <sessionId>
+see_also:
+  packages: packages/klaus-ai-packages.yml
+  authentication: authentication/klaus-ai-authentication.yml
+  conventions: conventions/klaus-ai-conventions.yml

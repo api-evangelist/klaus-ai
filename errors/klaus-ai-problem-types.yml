@@ -1,0 +1,72 @@
+generated: '2026-07-19'
+method: derived
+source: npm @klausai/cli@0.1.7 (dist/klaus.js published bundle); RFC 8628
+format: oauth2-device-grant
+rfc9457: false
+description: >-
+  Klaus publishes no error reference and no OpenAPI, so there are no 4xx/5xx response definitions to derive
+  from. The errors below are the ones the provider's own published CLI handles explicitly: the RFC 8628 device
+  authorization grant error codes returned by the token endpoint, and the HTTP status the chat-completions
+  proxy returns on a bad credential. This is a deliberately thin, honest catalog rather than a padded one.
+envelope:
+  device_flow:
+    fields:
+    - error
+    - error_description
+    content_type: application/json
+  http:
+    note: Transport errors surface as HTTP status codes with a text body.
+problems:
+- code: authorization_pending
+  status: 400
+  title: Authorization pending
+  meaning: The user has not yet approved the device code.
+  action: Keep polling the token endpoint at the interval returned by the device code response.
+  source_operation: POST https://api.klausai.com/api/auth/device/token
+  standard: RFC 8628
+- code: slow_down
+  status: 400
+  title: Polling too fast
+  meaning: The client is polling the token endpoint more often than allowed.
+  action: Increase the polling interval and retry.
+  source_operation: POST https://api.klausai.com/api/auth/device/token
+  standard: RFC 8628
+- code: expired_token
+  status: 400
+  title: Device code expired
+  meaning: The device code has expired before the user approved it.
+  action: Restart the login flow to obtain a fresh device code.
+  source_operation: POST https://api.klausai.com/api/auth/device/token
+  standard: RFC 8628
+- code: access_denied
+  status: 400
+  title: Authorization denied
+  meaning: The user declined the authorization request.
+  action: Restart the login flow and approve the request, or authenticate with an API key instead.
+  source_operation: POST https://api.klausai.com/api/auth/device/token
+  standard: RFC 8628
+- code: null
+  status: 401
+  title: Not authenticated
+  meaning: No credential was presented, or the API key or session token is invalid or expired.
+  action: >-
+    Re-authenticate, or create a new API key at https://klausai.com/account and set it in the KLAUS_API_KEY
+    environment variable.
+  source_operation: POST https://api.klausai.com/openclaw/v1/chat/completions
+operational_errors:
+  note: >-
+    The FAQ additionally documents runtime conditions surfaced to users in the agent session rather than as
+    API error codes. They are recorded here because they are the errors Klaus users actually hit.
+  entries:
+  - message: Context overflow
+    meaning: The conversation exceeds the selected model's context window.
+    action: Switch to a longer-context model, add credits, or start a new session with /new or /reset.
+    source: https://klausai.com/faq/
+  - message: Key limit exceeded
+    meaning: The account's OpenRouter token balance is exhausted.
+    action: Purchase additional tokens or add a bring-your-own OpenRouter key on the Billing page.
+    source: https://klausai.com/faq/
+  - message: Invalid config at /root/.openclaw/openclaw.json
+    meaning: The instance's OpenClaw configuration file is malformed.
+    action: Contact support@usebits.com.
+    source: https://klausai.com/faq/

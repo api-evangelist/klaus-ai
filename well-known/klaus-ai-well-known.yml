@@ -1,0 +1,93 @@
+generated: '2026-07-19'
+method: probed
+description: >-
+  Probe of the /.well-known/ discovery surface plus llms.txt and openapi.json on every Klaus host. klausai.com
+  and app.usebits.com are single-page applications that return HTTP 200 with the 2,435-byte application shell
+  for ANY unknown path, so a 200 alone is not evidence of a document. Each response body was compared against
+  the known shell; every probed discovery path returned the shell, meaning nothing is published. No raw files
+  were saved because no real document was served.
+soft_404_signature:
+  content_type: text/html
+  size_bytes: 2435
+  note: Identical body returned for /nonexistent-xyz-123, confirming the SPA catch-all.
+hosts:
+- host: https://klausai.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+  - path: /.well-known/openid-configuration
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+  - path: /.well-known/api-catalog
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+  - path: /llms.txt
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+  - path: /openapi.json
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+  - path: /sitemap.xml
+    status: 200
+    result: real XML sitemap, 39 URLs
+    published: true
+  - path: /blog/rss.xml
+    status: 200
+    result: real RSS 2.0 feed (Klaus Blog)
+    published: true
+- host: https://api.klausai.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    published: false
+  - path: /openapi.json
+    status: 404
+    published: false
+  - path: /docs
+    status: 404
+    published: false
+- host: https://app.usebits.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+  - path: /openapi.json
+    status: 200
+    result: soft-404 (SPA shell)
+    published: false
+- host: https://usebits.com
+  note: 301 redirects to https://klausai.com/
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: soft-404 (SPA shell after redirect)
+    published: false
+- host: https://api.usebits.com
+  documents:
+  - path: /
+    status: 404
+    published: false
+summary:
+  well_known_documents_published: 0
+  security_txt: false
+  openid_configuration: false
+  api_catalog: false
+  llms_txt: false
+  feeds_published:
+  - https://klausai.com/sitemap.xml
+  - https://klausai.com/blog/rss.xml

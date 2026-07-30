@@ -1,0 +1,53 @@
+generated: '2026-07-19'
+method: searched
+source: https://registry.npmjs.org/
+notes: >-
+  Both packages are published under the @klausai npm scope by the npm user "baileywickham", which matches
+  Klaus co-founder Bailey Wickham, so both are treated as first-party. No first-party Klaus packages were
+  found on PyPI, RubyGems, Packagist, crates.io, NuGet, Maven Central, or pkg.go.dev.
+packages:
+- language: javascript
+  registry: npm
+  name: '@klausai/cli'
+  url: https://www.npmjs.com/package/@klausai/cli
+  install: npm install -g @klausai/cli
+  binary: klaus
+  version: 0.1.7
+  description: CLI for Klaus — manage your AI agent from the terminal
+  official: true
+  first_published: '2026-04-15'
+  last_published: '2026-04-16'
+  transport: tRPC client (@trpc/client) against https://api.klausai.com/trpc
+- language: javascript
+  registry: npm
+  name: '@klausai/openclaw'
+  url: https://www.npmjs.com/package/@klausai/openclaw
+  install: npm install -g @klausai/openclaw
+  binary: openclaw
+  version: 2026.3.24
+  description: Multi-channel AI gateway with extensible messaging integrations
+  license: MIT
+  repository: https://github.com/usebitscorp/openclaw
+  homepage: https://github.com/openclaw/openclaw#readme
+  official: true
+  first_published: '2026-03-25'
+  note: >-
+    Klaus-scoped distribution of the upstream OpenClaw agent runtime that Klaus hosts. Published by the same
+    Klaus maintainer; repository field points at the usebitscorp GitHub account.
+registries_checked:
+- registry: npm
+  result: 2 first-party packages found
+- registry: pypi
+  result: none found
+- registry: rubygems
+  result: none found
+- registry: packagist
+  result: none found
+- registry: crates.io
+  result: none found
+- registry: nuget
+  result: none found
+- registry: maven-central
+  result: none found
+- registry: pkg.go.dev
+  result: none found

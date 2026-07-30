@@ -1,0 +1,86 @@
+generated: '2026-07-19'
+method: searched
+source: https://klausai.com/; https://klausai.com/terms/; https://klausai.com/faq/; https://registry.npmjs.org/@klausai/cli
+description: >-
+  Versioning, deprecation, support, and availability posture for Klaus. Klaus is an early-stage YC W26 company
+  and publishes none of the usual operational-transparency surfaces; the absences below are recorded findings,
+  not omissions.
+versioning:
+  scheme: unversioned-rpc
+  api_version: null
+  current: null
+  docs: null
+  note: >-
+    tRPC procedures at api.klausai.com carry no version segment. The only /v1 in the surface is
+    /openclaw/v1/chat/completions, which tracks the OpenAI chat-completions shape rather than a Klaus API
+    version. The first-party CLI is semver-versioned on npm (0.1.7 as of 2026-04-16).
+client_versioning:
+  package: '@klausai/cli'
+  scheme: semver
+  current: 0.1.7
+  released: '2026-04-16'
+deprecation:
+  policy_url: null
+  sunset_header: null
+  deprecation_header: null
+  note: No deprecation or sunset policy is published. No Deprecation pointer is emitted.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    The Terms of Service caps total liability at fees paid in the preceding twelve months and offers no uptime
+    commitment.
+status_page: null
+status_page_note: >-
+  No status page found. status.klausai.com does not resolve; no statuspage.io, instatus, or betterstack page
+  is linked from the site. No StatusPage pointer is emitted.
+health_tooling:
+  name: Klaus Health / troubleshooter
+  description: >-
+    A per-instance automated repair system that diagnoses and fixes common instance problems, with a Klaus
+    Health page showing past runs and a manual trigger. This is per-customer instance health, not a public
+    service status page.
+  source: https://klausai.com/faq/
+changelog:
+  url: null
+  note: >-
+    No dated product changelog is published. The blog is editorial and how-to content rather than release
+    notes, so no changelog/ artifact was written.
+backups:
+  description: Daily EBS snapshots of each instance disk; restoration by request to support@usebits.com.
+  source: https://klausai.com/faq/
+support:
+  channels:
+  - type: email
+    value: support@usebits.com
+  - type: email
+    value: founders@usebits.com
+    note: managed rollout enquiries
+  - type: discord
+    value: '#help channel'
+  - type: in-product
+    value: Get Help in the chat sidebar
+  source: https://klausai.com/faq/
+compute_tiers:
+  source: https://klausai.com/faq/
+  tiers:
+  - plan: Starter
+    instance: t4g.small
+    vcpu: 2
+    memory_gb: 2
+    storage_gb: 30
+  - plan: Plus
+    instance: t4g.medium
+    vcpu: 2
+    memory_gb: 4
+    storage_gb: 60
+  - plan: Pro
+    instance: t4g.xlarge
+    vcpu: 4
+    memory_gb: 16
+    storage_gb: 100
+legal:
+  entity: Usebits Inc
+  terms_last_updated: '2026-03-22'
+  privacy_last_updated: '2026-02-06'
+deprecated_operations: []

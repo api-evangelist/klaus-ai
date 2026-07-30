@@ -1,0 +1,99 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: npm @klausai/cli@0.1.7 (dist/klaus.js published bundle)
+description: >-
+  Klaus operates no official hosted or remote MCP server. No MCP server was found in the MCP registry, on npm
+  under @modelcontextprotocol or @klausai, or in Klaus's own material — Klaus's MCP content is about connecting
+  a hosted OpenClaw agent TO third-party MCP servers, not about Klaus exposing one. The tools below are a
+  CANDIDATE server sketch derived from the tRPC procedures the provider's own published CLI calls; every tool
+  name maps to a real, verified procedure. This is a proposal, not a Klaus claim.
+official_server: null
+registry_checked:
+- registry: MCP official registry
+  result: no io.klausai / klaus entry
+- registry: npm @modelcontextprotocol
+  result: none
+- registry: npm @klausai
+  result: only cli and openclaw packages
+server:
+  name: klaus-ai
+  transport: http
+  url: null
+  api_base: https://api.klausai.com/trpc
+  authentication:
+  - x-api-key header
+  - Authorization bearer session token
+  instance_header: x-klaus-instance-id
+tools:
+- name: get_me
+  description: Show the current user and organization.
+  source_operation: trpc:me.get
+  kind: query
+- name: list_access
+  description: List all hosted instances the caller has access to.
+  source_operation: trpc:access.list
+  kind: query
+- name: set_active_instance
+  description: Switch the active hosted instance for subsequent calls.
+  source_operation: trpc:access.setActive
+  kind: mutation
+- name: list_agents
+  description: List agents.
+  source_operation: trpc:agents.list
+  kind: query
+- name: get_agent
+  description: Show details for one agent.
+  source_operation: trpc:agents.get
+  kind: query
+- name: list_integrations
+  description: List integrations and their connection status.
+  source_operation: trpc:integrations.list
+  kind: query
+- name: get_integration
+  description: Show details for one integration.
+  source_operation: trpc:integrations.get
+  kind: query
+- name: list_models
+  description: List models available to the account.
+  source_operation: trpc:models.list
+  kind: query
+- name: get_current_model
+  description: Show the currently selected primary model.
+  source_operation: trpc:models.current
+  kind: query
+- name: set_model
+  description: Set the primary model for the instance.
+  source_operation: trpc:models.set
+  kind: mutation
+- name: create_instance
+  description: Provision a new hosted OpenClaw instance.
+  source_operation: trpc:openclaw.create
+  kind: mutation
+  consequence: write
+- name: delete_instance
+  description: Delete a hosted OpenClaw instance.
+  source_operation: trpc:openclaw.delete
+  kind: mutation
+  consequence: destructive
+- name: get_instance_status
+  description: Show provisioning and health status for an instance.
+  source_operation: trpc:openclaw.status
+  kind: query
+- name: exec_on_instance
+  description: Run a shell command on the instance (max 120 second timeout).
+  source_operation: trpc:openclaw.exec
+  kind: mutation
+  consequence: destructive
+- name: list_sessions
+  description: List past chat sessions.
+  source_operation: trpc:sessions.list
+  kind: query
+- name: preview_session
+  description: Preview the messages in a session.
+  source_operation: trpc:sessions.preview
+  kind: query
+- name: chat
+  description: Send a message to the agent via the OpenAI-compatible chat-completions proxy.
+  source_operation: 'POST /openclaw/v1/chat/completions'
+  kind: mutation

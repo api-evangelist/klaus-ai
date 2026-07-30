@@ -1,0 +1,75 @@
+generated: '2026-07-19'
+method: derived
+source: npm @klausai/cli@0.1.7 (dist/klaus.js published bundle); https://klausai.com/faq/
+description: >-
+  Cross-cutting request/response semantics for the Klaus platform API. Klaus publishes no API reference, so
+  these conventions were read from the provider's own published npm client and from the public FAQ. Anything
+  Klaus does not publish or implement is recorded as null rather than guessed.
+api_style:
+  protocol: tRPC over HTTP
+  endpoint: https://api.klausai.com/trpc
+  procedure_naming: '<namespace>.<procedure>, e.g. instances via openclaw.status, identity via me.get'
+  method_semantics: tRPC queries are reads; tRPC mutations are writes
+  compatibility_surface:
+    name: OpenAI-compatible chat completions
+    endpoint: POST https://api.klausai.com/openclaw/v1/chat/completions
+    body_fields:
+    - messages
+    - stream
+    note: Proxied through to the caller's active OpenClaw instance.
+authentication:
+  styles:
+  - 'API key in x-api-key header'
+  - 'Bearer session token in Authorization header'
+  artifact: authentication/klaus-ai-authentication.yml
+  unauthenticated_status: 401
+tenancy:
+  header: x-klaus-instance-id
+  description: >-
+    Requests are scoped to one hosted OpenClaw instance. The CLI persists an active instance locally and sends
+    it on every call; access.setActive changes it server-side.
+  discovery_procedure: access.list
+idempotency:
+  supported: null
+  header: null
+  note: >-
+    Klaus documents no idempotency key and none appears in the published client. No Idempotency pointer is
+    emitted for this provider.
+pagination:
+  style: limit-only
+  parameters:
+  - name: limit
+    used_by:
+    - sessions.list
+    - sessions.preview
+    default: 20
+  cursor: null
+  note: The published client exposes only a result-count limit; no cursor or offset parameter is visible.
+field_expansion: null
+metadata: null
+request_tracing:
+  request_id_header: null
+versioning:
+  api_version_in_path: false
+  note: >-
+    tRPC procedures are unversioned. The only version segment in the surface is /v1/chat/completions, which
+    tracks the OpenAI chat-completions shape. The CLI itself is semver-versioned on npm.
+  artifact: lifecycle/klaus-ai-lifecycle.yml
+error_envelope:
+  transport_errors: HTTP status codes; 401 on missing or invalid credentials
+  device_flow_errors: >-
+    JSON body with OAuth-standard error and error_description fields (authorization_pending, slow_down,
+    expired_token, access_denied)
+  format: null
+  rfc9457: false
+  artifact: errors/klaus-ai-problem-types.yml
+rate_limiting:
+  api_headers: null
+  note: >-
+    No rate-limit headers are documented for the Klaus API. Model-level throttling is inherited from
+    OpenRouter, which the FAQ describes as treating all Klaus accounts as a single user on free tiers, with
+    bring-your-own-key recommended for dedicated limits.
+webhooks:
+  artifact: asyncapi/klaus-ai-webhooks.yml
+timeouts:
+  instance_exec_max_seconds: 120
