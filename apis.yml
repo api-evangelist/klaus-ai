@@ -77,6 +77,8 @@ apis:
   - type: CLI
     url: cli/klaus-ai-cli.yml
 common:
+- type: MCPServer
+  url: mcp/klaus-ai-mcp.yml
 - type: Website
   url: https://klausai.com/
 - type: DeveloperPortal
