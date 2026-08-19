@@ -2,12 +2,11 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: npm @klausai/cli@0.1.7 (dist/klaus.js published bundle)
-description: >-
-  Klaus operates no official hosted or remote MCP server. No MCP server was found in the MCP registry, on npm
-  under @modelcontextprotocol or @klausai, or in Klaus's own material — Klaus's MCP content is about connecting
-  a hosted OpenClaw agent TO third-party MCP servers, not about Klaus exposing one. The tools below are a
-  CANDIDATE server sketch derived from the tRPC procedures the provider's own published CLI calls; every tool
-  name maps to a real, verified procedure. This is a proposal, not a Klaus claim.
+description: Klaus operates no official hosted or remote MCP server. No MCP server was found in the MCP
+  registry, on npm under @modelcontextprotocol or @klausai, or in Klaus's own material — Klaus's MCP content
+  is about connecting a hosted OpenClaw agent TO third-party MCP servers, not about Klaus exposing one.
+  The tools below are a CANDIDATE server sketch derived from the tRPC procedures the provider's own published
+  CLI calls; every tool name maps to a real, verified procedure. This is a proposal, not a Klaus claim.
 official_server: null
 registry_checked:
 - registry: MCP official registry
@@ -95,5 +94,11 @@ tools:
   kind: query
 - name: chat
   description: Send a message to the agent via the OpenAI-compatible chat-completions proxy.
-  source_operation: 'POST /openclaw/v1/chat/completions'
+  source_operation: POST /openclaw/v1/chat/completions
   kind: mutation
+deployment:
+  mode: none
+  verified: derived
+  tools: 17
+  checked: '2026-08-12'
+  source: catalog MCP census
