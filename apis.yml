@@ -42,6 +42,19 @@ tags:
 - Personal Assistant
 - Automation
 - Managed Hosting
+- Integration
+- Webhook
+- Command Line
+- Messaging
+- Y Combinator
+tags_raw:
+- Artificial Intelligence
+- AI Agents
+- Agent Hosting
+- OpenClaw
+- Personal Assistant
+- Automation
+- Managed Hosting
 - Integrations
 - Webhooks
 - Command Line
@@ -61,6 +74,13 @@ apis:
   humanURL: https://klausai.com/faq/
   baseURL: https://api.klausai.com
   tags:
+  - AI Agents
+  - Instances
+  - Integration
+  - Models
+  - Sessions
+  - Chat Completions
+  tags_raw:
   - AI Agents
   - Instances
   - Integrations
