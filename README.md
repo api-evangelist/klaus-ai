@@ -64,38 +64,104 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Klaus is a managed cloud hosting platform for OpenClaw AI agents, built by **Usebits Inc** (Y Combinator W26, San Francisco), founded by Bailey Wickham and Robbie Thompson. Klaus provisions an isolated, pre-configured OpenClaw instance on dedicated AWS ARM compute in about five minutes, with messaging channels (Slack, Telegram, WhatsApp, iMessage, Discord), Google Workspace, browser automation, AgentMail email, GitHub backup, Tailscale SSH, scheduled cron tasks, semantic memory, and inbound instance webhooks.
+Klaus is a managed cloud hosting platform for OpenClaw AI agents, built by Usebits Inc (Y Combinator W26, San Francisco) and founded by Bailey Wickham and Robbie Thompson. Klaus provisions an isolated, pre-configured OpenClaw instance on dedicated AWS ARM compute in about five minutes, with messaging channels (Slack, Telegram, WhatsApp, iMessage, Discord), Google Workspace, browser automation via Chromium and a Chrome Browser Relay extension, AgentMail email, GitHub backup, Tailscale SSH, scheduled cron tasks, semantic memory backed by OpenRouter embeddings, and instance webhooks that let external services trigger the agent over authenticated HTTP. Model access is brokered through OpenRouter with bring-your-own-key and ChatGPT-subscription options. The platform is operated through the Klaus web dashboard and a first-party command-line client published to npm as @klausai/cli, which talks to a tRPC API at api.klausai.com and proxies an OpenAI-compatible chat-completions endpoint. Authentication is by API key or an OAuth 2.0 Device Authorization Grant (RFC 8628).
 
-- Website: https://klausai.com/
-- FAQ (closest thing to developer docs): https://klausai.com/faq/
-- Blog: https://klausai.com/blog/
-- Pricing: https://klausai.com/klaus/subscribe
+**Areas:** Artificial Intelligence · AI Agents · Agent Hosting · OpenClaw · Personal Assistant · Automation · Managed Hosting · Integration · Webhook · Command Line · Messaging · Y Combinator
 
-## API surface
+## Klaus AI on APIs.io
 
-Klaus publishes **no OpenAPI description**. The platform API at `https://api.klausai.com` is a tRPC surface, plus an OpenAI-compatible `POST /openclaw/v1/chat/completions` proxy. Everything catalogued in this repo about that surface was read from the provider's own published npm client, [`@klausai/cli`](https://www.npmjs.com/package/@klausai/cli) — no shapes were invented.
+Everything profiled for Klaus AI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/klaus-ai/](https://apis.io/providers/klaus-ai/)** — or go straight to one of the APIs or properties below.
 
-Auth is an API key in the `x-api-key` header (created at https://klausai.com/account) or a bearer session token from an OAuth 2.0 Device Authorization Grant (RFC 8628).
+### APIs (1)
 
-## Artifacts
+- [Klaus Platform API](https://apis.io/apis/klaus-ai/klaus-ai-platform-api/) — The Klaus platform API at api.klausai.com is a tRPC RPC surface used by the first-party @klausai/cli command-line client to manage OpenClaw instances,…
 
-| Artifact | File |
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Klaus Ai Webhooks](https://apis.io/asyncapis/klaus-ai/klaus-ai-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [klaus-ai](https://apis.io/servers/klaus-ai/klaus-ai/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Klaus Ai Authentication](https://apis.io/security/klaus-ai/klaus-ai-authentication/)
+- [Klaus Ai Domain Security](https://apis.io/security/klaus-ai/klaus-ai-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://klausai.com/)
+- [Documentation](https://klausai.com/faq/)
+- [Getting started](https://klausai.com/blog/how-to-set-up-openclaw-complete-getting-started-guide/)
+- [Pricing](https://klausai.com/klaus/subscribe)
+- [Sign up](https://klausai.com/login)
+- [Support](https://klausai.com/support)
+- [Blog](https://klausai.com/blog/)
+- [Terms of service](https://klausai.com/terms/)
+- [Privacy policy](https://klausai.com/privacy/)
+
+## API Evangelist rating
+
+**Kin Score 35.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| Packages / SDKs | `packages/klaus-ai-packages.yml` |
-| CLI | `cli/klaus-ai-cli.yml` |
-| Authentication | `authentication/klaus-ai-authentication.yml` |
-| Conventions | `conventions/klaus-ai-conventions.yml` |
-| Error catalog | `errors/klaus-ai-problem-types.yml` |
-| Webhooks | `asyncapi/klaus-ai-webhooks.yml` |
-| MCP (candidate only — Klaus runs no MCP server) | `mcp/klaus-ai-mcp.yml` |
-| Conformance | `conformance/klaus-ai-conformance.yml` |
-| Lifecycle | `lifecycle/klaus-ai-lifecycle.yml` |
-| Well-known probe | `well-known/klaus-ai-well-known.yml` |
-| Domain security | `security/klaus-ai-domain-security.yml` |
-| llms.txt | `llms/klaus-ai-llms.txt` |
+| Discoverability | 73.2 |
+| Contract quality | 39.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 59.5 |
+| Access clarity | 21.1 |
 
-## Recorded absences (as of 2026-07-19)
+**Agent readiness 20.5** — agent-aware
 
-No OpenAPI, no AsyncAPI, no status page, no changelog, no deprecation policy, no `/.well-known/` documents, no `llms.txt`, no vulnerability-disclosure program, no trust center, and no published compliance certifications. `klausai.com` and `app.usebits.com` return HTTP 200 with the SPA shell for any unknown path, so discovery probes were verified by body comparison rather than status code.
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-Backed by: y-combinator
+**Regulatory alignment 22.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/klaus-ai/](https://apis.io/providers/klaus-ai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Klaus AI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/klaus-ai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
